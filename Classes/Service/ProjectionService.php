@@ -11,7 +11,7 @@ use Neos\ContentRepository\Core\Subscription\Engine\SubscriptionEngine;
 /**
  * Content Repository service to perform Projection replays
  *
- * @internal this is currently only used by the {@see CrCommandController}
+ * @internal
  */
 final class ProjectionReplayService implements ContentRepositoryServiceInterface
 {
