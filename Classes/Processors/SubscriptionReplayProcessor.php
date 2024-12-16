@@ -3,23 +3,22 @@ declare(strict_types=1);
 
 namespace Neos\ContentRepositoryRegistry\Processors;
 
-use Neos\ContentRepository\Core\Projection\CatchUpOptions;
+use Neos\ContentRepository\Core\Service\ContentRepositoryMaintainer;
 use Neos\ContentRepository\Export\ProcessingContext;
 use Neos\ContentRepository\Export\ProcessorInterface;
-use Neos\ContentRepositoryRegistry\Service\ProjectionService;
 
 /**
  * @internal
  */
-final class ProjectionCatchupProcessor implements ProcessorInterface
+final readonly class SubscriptionReplayProcessor implements ProcessorInterface
 {
     public function __construct(
-        private readonly ProjectionService $projectionservice,
+        private ContentRepositoryMaintainer $contentRepositoryMaintainer,
     ) {
     }
 
     public function run(ProcessingContext $context): void
     {
-        $this->projectionservice->catchupAllProjections(CatchUpOptions::create());
+        $this->contentRepositoryMaintainer->replayAllSubscriptions();
     }
 }
